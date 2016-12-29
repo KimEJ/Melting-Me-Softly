@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private EditText phonnum;
+    private EditText message;
     private ToggleButton send;
     private ArrayList<MmsThread> threads;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         phonnum = (EditText) findViewById(R.id.editText);
+        message = (EditText) findViewById(R.id.editText3);
         send = (ToggleButton) findViewById(R.id.toggleButton);
         send.setOnClickListener(onClickListener);
 }
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             if(send.isChecked()) {
                 for(MmsThread mms : threads) {
+                    mms.sendmessage = message.getText().toString();
                     mms.sendTo = phonnum.getText().toString();
                     mms.check = true;
                 }
